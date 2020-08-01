@@ -9,9 +9,13 @@
   "author": "Oliveira",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "morgan": "^1.10.0",
     "mysql2": "^2.1.0",
+    "path": "^0.12.7",
     "sequelize": "^6.3.3"
   },
   "devDependencies": {

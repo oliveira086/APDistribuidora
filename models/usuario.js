@@ -1,6 +1,6 @@
 module.exports = function (sequelize, DataTypes) {
     const Usuario = sequelize.define(
-        'Usuarios',
+        'Usuario',
         {
             id: {
                 type: DataTypes.INTEGER(11),
@@ -24,9 +24,22 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: false,
                 comment: 'null',  
             },
+            createdAt: {
+                type: Sequelize.STRING(15),
+                field: 'created_at',
+                allowNull: false,
+                comment: 'null'
+            },
+            updatedAt: {
+                type: Sequelize.STRING(15),
+                field: 'updated_at',
+                allowNull: false,
+                comment: 'null'
+            }
         },
         {
-            tableName: 'usuarios'
+            tableName: 'usuarios',
+            timestamps: true,
         }
     );
 
