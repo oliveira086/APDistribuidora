@@ -1,5 +1,5 @@
-module.exports = function (sequelize, DataTypes) {
-    const Usuario = sequelize.define(
+const Usuario = (sequelize, DataTypes) => {
+    let usuario = sequelize.define(
         'Usuario',
         {
             id: {
@@ -25,15 +25,13 @@ module.exports = function (sequelize, DataTypes) {
                 comment: 'null',  
             },
             createdAt: {
-                type: Sequelize.STRING(15),
-                field: 'created_at',
-                allowNull: false,
+                type: DataTypes.DATE, 
+                allowNull: true,
                 comment: 'null'
             },
             updatedAt: {
-                type: Sequelize.STRING(15),
-                field: 'updated_at',
-                allowNull: false,
+                type: DataTypes.DATE,
+                allowNull: true,
                 comment: 'null'
             }
         },
@@ -43,5 +41,7 @@ module.exports = function (sequelize, DataTypes) {
         }
     );
 
-    return Usuario;
+    return usuario;
 };
+
+module.exports = Usuario;

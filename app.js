@@ -5,7 +5,10 @@ const  logger = require('morgan');
 
 const bodyParser = require('body-parser');
 
+const indexRota = require('./routes/index');
 const usuarioRota = require('./routes/usuariosRota');
+const produtoRota = require('./routes/produtosRota');
+
 
 const  app = express();
 
@@ -21,7 +24,10 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', indexRota);
 app.use('/usuarios', usuarioRota);
+app.use('/produtos', produtoRota);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

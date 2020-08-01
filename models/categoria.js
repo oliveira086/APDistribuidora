@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = function (sequelize, DataTypes) {
     const Categoria= sequelize.define(
         'categoria',

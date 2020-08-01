@@ -1,6 +1,8 @@
+"use strict";
+
 module.exports = function (sequelize, DataTypes){
-    const Produtos = sequelize.define(
-        'Produtos',
+    const Produto = sequelize.define(
+        'Produto',
         {
             id: {
                 type: DataTypes.INTEGER(11),
@@ -53,11 +55,28 @@ module.exports = function (sequelize, DataTypes){
                 type: DataTypes.STRING(200),
                 allowNull: true,
                 comment: 'sem imagem'
+            },
+            createdAt: {
+                type: DataTypes.DATE, 
+                allowNull: true,
+                comment: 'null'
+            },
+            updatedAt: {
+                type: DataTypes.DATE,
+                allowNull: true,
+                comment: 'null'
+            },
+            categoriaId: {
+                type: DataTypes.INTEGER(11),
+                allowNull: false,
+                comment: 'null'
             }
         },
         {
-            tableName: 'produtos'
+            tableName: 'produtos',
+            timestamps: true,
         }
     );
-    return Produtos;
+
+    return Produto;
 }
