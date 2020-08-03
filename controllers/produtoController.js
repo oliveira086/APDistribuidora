@@ -55,30 +55,67 @@ module.exports = {
 
         let nomeProduto = req.params.nome
 
-        const PRODUTOPESQUISADO = await Models.Produto.findOne(
+        const PRODUTOPESQUISADO = await Models.Produto.findAll(
             { 
-                where: { 
-                    nome: { [Op.like]: `%${nomeProduto}%`},
-                },
-                
-                // include: [
-                //     { 
-                //         model: Models.Categoria,
-                //         as: 'categoria',
-                //     }
-                // ]
-            } 
-        )
-
-        const categoria = await Models.Categoria.findOne(
-            {
-                where: {
-                    id: PRODUTOPESQUISADO.categoriaId
-                }
-            }
-        )
+            where: { 
+                nome: { [Op.like]: `%${nomeProduto}%`},
+            },
+            // include: [
+            //         { 
+            //             model: Models.Categoria,
+            //             as: 'categoria',
+            //         }
+            //     ]
+        })
 
         
+        let verificarLista = Array.isArray(PRODUTOPESQUISADO)
+
+        if(verificarLista == true){
+
+            const categoria = await Models.Categoria.findAll(
+                {
+                    attributes: ['id', 'descricao']
+                }
+            )
+            let listaResposta = []
+
+             PRODUTOPESQUISADO.map(async x => {
+
+                let objeto = {
+                    "id": x.id,
+                    "nome": x.nome,
+                    "quantidadeCaixa": x.quantidadeCaixa,
+                    "precoUnidade": x.precoUnidade,
+                    "quantidadeAtual": x.quantidadeAtual,
+                    "codigo": x.codigo,
+                    "precoVenda": x.precoVenda,
+                    "margem": x.margem,
+                    "icms": x.icms,
+                    "imagem": x.imagem,
+                    "createdAt": x.createdAt,
+                    "updatedAt": x.updatedAt,
+                    "categoria": categoria[x.categoriaId -1]
+                }
+
+                listaResposta.push(objeto)
+        })
+
+        res.status(200).json({ data: {
+            resposta: listaResposta
+        }});
+
+        } else {
+
+            const categoria = await Models.Categoria.findAll(
+                {
+                    where: {
+                        id: PRODUTOPESQUISADO.categoriaId
+                    },
+                    attributes: ['id', 'descricao']
+                }
+            )
+
             let objeto = {
                 "id": PRODUTOPESQUISADO.id,
                 "nome": PRODUTOPESQUISADO.nome,
@@ -94,11 +131,22 @@ module.exports = {
                 "updatedAt": PRODUTOPESQUISADO.updatedAt,
                 categoria
             }
-            
             res.status(200).json({ data: {
                 resposta: objeto
             }});
+        }
 
         
+
+        
+
+        
+
+        
+
+        
+            
+            
+            
     }
 }
