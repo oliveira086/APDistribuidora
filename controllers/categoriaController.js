@@ -30,17 +30,11 @@ module.exports = {
         } catch(e){
             console.log(e)
         }
-
-        
-
-
     },
 
     consultar: async(req, res, next) => {
         
         const { descricao } = req.body;
-
-        console.log(descricao)
 
         const CATEGORIAPESQUISADA = await Models.Categoria.findOne({where: {
             descricao: { [Op.like]: `%${descricao}%`}
@@ -54,8 +48,16 @@ module.exports = {
             res.status(200).json({ data: {
                 resposta: CATEGORIAPESQUISADA,
             }});
-        }
+        } 
+    },
 
-        
+    listar: async(req, res, next) => {
+
+        const CATEGORIALISTADAS = await Models.Categoria.findAll()
+
+        res.status(200).json({  data: {
+            resposta: CATEGORIALISTADAS
+        }})
+
     }
 }

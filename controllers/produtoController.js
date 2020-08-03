@@ -57,20 +57,48 @@ module.exports = {
 
         const PRODUTOPESQUISADO = await Models.Produto.findOne(
             { 
-                where: { nome: { [Op.like]: `%${nomeProduto}%`}},
+                where: { 
+                    nome: { [Op.like]: `%${nomeProduto}%`},
+                },
                 
-                include: [
-                    { 
-                        model: Models.Categoria,
-                        as: 'categoria'
-                    }
-                ]
-            }
-            
+                // include: [
+                //     { 
+                //         model: Models.Categoria,
+                //         as: 'categoria',
+                //     }
+                // ]
+            } 
         )
 
-        res.status(200).json({ data: {
-            resposta: PRODUTOPESQUISADO,
-        }});
+        const categoria = await Models.Categoria.findOne(
+            {
+                where: {
+                    id: PRODUTOPESQUISADO.categoriaId
+                }
+            }
+        )
+
+        
+            let objeto = {
+                "id": PRODUTOPESQUISADO.id,
+                "nome": PRODUTOPESQUISADO.nome,
+                "quantidadeCaiPRODUTOPESQUISADOa": PRODUTOPESQUISADO.quantidadeCaiPRODUTOPESQUISADOa,
+                "precoUnidade": PRODUTOPESQUISADO.precoUnidade,
+                "quantidadeAtual": PRODUTOPESQUISADO.quantidadeAtual,
+                "codigo": PRODUTOPESQUISADO.codigo,
+                "precoVenda": PRODUTOPESQUISADO.precoVenda,
+                "margem": PRODUTOPESQUISADO.margem,
+                "icms": PRODUTOPESQUISADO.icms,
+                "imagem": PRODUTOPESQUISADO.imagem,
+                "createdAt": PRODUTOPESQUISADO.createdAt,
+                "updatedAt": PRODUTOPESQUISADO.updatedAt,
+                categoria
+            }
+            
+            res.status(200).json({ data: {
+                resposta: objeto
+            }});
+
+        
     }
 }
