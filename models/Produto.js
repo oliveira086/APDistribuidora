@@ -70,14 +70,11 @@ module.exports = function (sequelize, DataTypes){
                 type: DataTypes.INTEGER(11),
                 allowNull: false,
                 comment: 'null',
-                references: {
-                    model: 'Categoria',
-                    key: 'id',
-                },
                 onUpdate: 'CASCADE',
                 onDelete: 'CASCADE',
             },
         },
+
         {
             tableName: 'produtos',
             timestamps: true,
@@ -85,7 +82,7 @@ module.exports = function (sequelize, DataTypes){
     );
     
     Produto.associate = (models) => {
-        Produto.belongsTo(models.Categoria, {as: 'categoria', foreignKey: 'categoriaId'});
+        Produto.hasMany(models.Categoria, {as: 'categoria', foreignKey:'id'})
     }
 
     return Produto;

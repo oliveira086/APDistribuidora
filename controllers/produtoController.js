@@ -14,7 +14,7 @@ module.exports = {
                 nome,
                 quantidadeCaixa,
                 precoUnidade, codigo, 
-                precoVenda, margem, icms, imagem
+                precoVenda, margem, icms, imagem, categoriaId
             } = req.body
 
             const EXISTS = await Models.Produto.findOne({ where: {codigo}, attributes: ['nome']})
@@ -31,7 +31,7 @@ module.exports = {
                     icms,
                     imagem,
                     quantidadeAtual: 0,
-                    categoriaId: 1
+                    categoriaId: categoriaId
                 }
 
                 const CADASTRARPRODUTO = await Models.Produto.create(objeto)
@@ -55,9 +55,19 @@ module.exports = {
 
         let nomeProduto = req.params.nome
 
-        const PRODUTOPESQUISADO = await Models.Produto.findOne({where: {
-            nome: { [Op.like]: `%${nomeProduto}%`}
-        } })
+        const PRODUTOPESQUISADO = await Models.Produto.findOne(
+            { 
+                where: { nome: { [Op.like]: `%${nomeProduto}%`}},
+                
+                include: [
+                    { 
+                        model: Models.Categoria,
+                        as: 'categoria'
+                    }
+                ]
+            }
+            
+        )
 
         res.status(200).json({ data: {
             resposta: PRODUTOPESQUISADO,
