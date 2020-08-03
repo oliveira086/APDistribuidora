@@ -69,14 +69,24 @@ module.exports = function (sequelize, DataTypes){
             categoriaId: {
                 type: DataTypes.INTEGER(11),
                 allowNull: false,
-                comment: 'null'
-            }
+                comment: 'null',
+                references: {
+                    model: 'Categoria',
+                    key: 'id',
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE',
+            },
         },
         {
             tableName: 'produtos',
             timestamps: true,
         }
     );
+    
+    Produto.associate = (models) => {
+        Produto.belongsTo(models.Categoria, {as: 'categoria', foreignKey: 'categoriaId'});
+    }
 
     return Produto;
 }

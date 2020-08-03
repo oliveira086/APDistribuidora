@@ -2,7 +2,7 @@
 
 module.exports = function (sequelize, DataTypes) {
     const Categoria= sequelize.define(
-        'categoria',
+        'Categoria',
         {
             id: {
                 type: DataTypes.INTEGER(11),
@@ -21,6 +21,10 @@ module.exports = function (sequelize, DataTypes) {
             tableName: 'categoria'
         }
     );
+
+    Categoria.associate = (models) => {
+        Categoria.hasMany(models.Produto, {as: 'categoria', foreignKey: 'categoriaId'});
+    }
 
     return Categoria;
 };
