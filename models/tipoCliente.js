@@ -14,6 +14,16 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: false,
                 comment: 'null'
             },
+            createdAt: {
+                type: DataTypes.DATE, 
+                allowNull: true,
+                comment: 'null'
+            },
+            updatedAt: {
+                type: DataTypes.DATE,
+                allowNull: true,
+                comment: 'null'
+            },
         },
         {
             tableName: 'tipoCliente'

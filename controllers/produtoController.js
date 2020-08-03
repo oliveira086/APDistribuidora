@@ -107,7 +107,7 @@ module.exports = {
 
         } else {
 
-            const categoria = await Models.Categoria.findAll(
+            const categoria = await Models.Categoria.findOne(
                 {
                     where: {
                         id: PRODUTOPESQUISADO.categoriaId
@@ -119,7 +119,7 @@ module.exports = {
             let objeto = {
                 "id": PRODUTOPESQUISADO.id,
                 "nome": PRODUTOPESQUISADO.nome,
-                "quantidadeCaiPRODUTOPESQUISADOa": PRODUTOPESQUISADO.quantidadeCaiPRODUTOPESQUISADOa,
+                "quantidadeCaixa": PRODUTOPESQUISADO.quantidadeCaiPRODUTOPESQUISADOa,
                 "precoUnidade": PRODUTOPESQUISADO.precoUnidade,
                 "quantidadeAtual": PRODUTOPESQUISADO.quantidadeAtual,
                 "codigo": PRODUTOPESQUISADO.codigo,
