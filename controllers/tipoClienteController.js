@@ -1,8 +1,5 @@
 const Models = require('../models');
 const sequelize = require('sequelize');
-const { consultar } = require('./produtoController');
-const Op = sequelize.Op;
-
 
 module.exports = {
 
@@ -29,5 +26,15 @@ module.exports = {
         } catch (e) {
             console.log(e)
         }
+    },
+    listar: async(req, res, next) => {
+
+        const TIPO = await Models.TipoCliente.findAll(
+            {attributes: ['id', 'descricao']}
+        )
+
+        res.status(200).json({ data: {
+            resposta: TIPO,
+        }});
     }
 }

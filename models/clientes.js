@@ -49,9 +49,24 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: false,
                 comment: 'null'
             },
+            tipoCliente: {
+                type: DataTypes.INTEGER(11),
+                allowNull: false,
+                comment: 'null'
+            },
+            bairro: {
+                type: DataTypes.STRING(45),
+                allowNull: false,
+                comment: 'null'
+            },
+            inscricaoEstadual: {
+                type: DataTypes.STRING(45),
+                allowNull: false,
+                comment: 'null'
+            },
         },
         {
-            tableName: 'Clientes'
+            tableName: 'clientes'
         }
     );
     return Clientes;

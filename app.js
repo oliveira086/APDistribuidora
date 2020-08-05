@@ -10,6 +10,7 @@ const usuarioRota = require('./routes/usuariosRota');
 const produtoRota = require('./routes/produtosRota');
 const categoriaRota = require('./routes/categoriaRota')
 const tipoClientRota = require('./routes/tipoClienteRota')
+const clienteRota = require('./routes/clienteRota')
 
 
 const  app = express();
@@ -31,6 +32,7 @@ app.use('/usuarios', usuarioRota);
 app.use('/produtos', produtoRota);
 app.use('/categorias', categoriaRota);
 app.use('/tipocliente', tipoClientRota);
+app.use('/cliente', clienteRota);
 
 
 // catch 404 and forward to error handler
