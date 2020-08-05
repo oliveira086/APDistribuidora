@@ -63,7 +63,7 @@ module.exports = {
                         }
                     }]
             },attributes: ['nomeEmpresa', 'cpd']
-                
+            
         })
 
         if(EMPRESA == null){
