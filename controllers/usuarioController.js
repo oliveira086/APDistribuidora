@@ -43,7 +43,7 @@ module.exports = {
         try{
             const { nome, senha } = req.body
 
-            const EXISTS = await Models.Usuario.findOne({ where: {nome}, attributes:['nome', 'senha'] })
+            const EXISTS = await Models.Usuario.findOne({ where: { nome }, attributes:['nome', 'senha'] })
 
             if(EXISTS == null){
                 res.status(200).json({ data: {
@@ -69,5 +69,4 @@ module.exports = {
         }
     }
     
-
 }
